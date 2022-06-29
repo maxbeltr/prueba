@@ -26,9 +26,9 @@ jobs:
         with:
            name: Depcheck report
            path: ${{github.workspace}}/reports
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+     # - uses: actions/checkout@v2
+     #   with:
+     #     fetch-depth: 0
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
