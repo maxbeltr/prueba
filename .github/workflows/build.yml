@@ -23,6 +23,8 @@ jobs:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Prepare structure for Maven
+        run: mvn -B archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=com.mcnz.maven -DartifactId=install-maven-tutorial
       - name: Build project with Maven
         run: mvn clean install
       - name: Depcheck
