@@ -65,28 +65,29 @@ jobs:
           path: '.'
           format: 'HTML'
       
-      - name: Anchore scan
-        uses: anchore/scan-action@v2
-        with:
-          image: "docker.io/maartensmeets/spring-boot-demo"
+  #    - name: Anchore scan
+  #      uses: anchore/scan-action@v2
+  #      with:
+  #        image: "docker.io/maartensmeets/spring-boot-demo"
           
-      - name: Start service
-        run: |
-          docker network create zap
-          docker run --pull always --name spring-boot-demo --network zap -d -p 8080:8080 docker.io/maartensmeets/spring-boot-demo
+  #    - name: Start service
+  #      run: |
+  #        docker network create zap
+  #        docker run --pull always --name spring-boot-demo --network zap -d -p 8080:8080 docker.io/maartensmeets/spring-boot-demo
 
-      - name: OWASP ZAP scan
-        run: |
+  #    - name: OWASP ZAP scan
+  #      run: |
             # make file runnable, might not be necessary
-            chmod +x "${GITHUB_WORKSPACE}/.github/zap_cli_scan.sh"
+  #          chmod +x "${GITHUB_WORKSPACE}/.github/zap_cli_scan.sh"
             # run script
-            "${GITHUB_WORKSPACE}/.github/zap_cli_scan.sh"
-            mv owaspreport.html target
+  #          "${GITHUB_WORKSPACE}/.github/zap_cli_scan.sh"
+  #          mv owaspreport.html target
 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.java.pmd.reportPaths=target/pmd.xml,target/dependency-check-report-pmd.xml -Dsonar.java.spotbugs.reportPaths=target/spotbugsXml.xml
 
       - name: 'Publish Test Report'
