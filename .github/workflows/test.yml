@@ -46,14 +46,12 @@ jobs:
             ~/.cache/google-cloud-tools-java/jib
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2          
-
       - name: Cache SonarCloud packages
         uses: actions/cache@v2
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-
       - name: Static checks
 #        run: mvn --batch-mode --update-snapshots dependency-check:check pmd:pmd pmd:cpd spotbugs:spotbugs
          run: 
@@ -68,17 +66,14 @@ jobs:
           project: 'prueba'
           path: '.'
           format: 'HTML'
-      
   #    - name: Anchore scan
   #      uses: anchore/scan-action@v2
   #      with:
   #        image: "docker.io/maartensmeets/spring-boot-demo"
-          
   #    - name: Start service
   #      run: |
   #        docker network create zap
   #        docker run --pull always --name spring-boot-demo --network zap -d -p 8080:8080 docker.io/maartensmeets/spring-boot-demo
-
   #    - name: OWASP ZAP scan
   #      run: |
             # make file runnable, might not be necessary
@@ -86,7 +81,6 @@ jobs:
             # run script
   #          "${GITHUB_WORKSPACE}/.github/zap_cli_scan.sh"
   #          mv owaspreport.html target
-
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -95,7 +89,6 @@ jobs:
         run: 
 #        cd .github/
         mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.java.pmd.reportPaths=target/pmd.xml,target/dependency-check-report-pmd.xml -Dsonar.java.spotbugs.reportPaths=target/spotbugsXml.xml
-
       - name: 'Publish Test Report'
         if: always()
         uses: actions/upload-artifact@v2
