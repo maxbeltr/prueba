@@ -55,8 +55,15 @@ jobs:
       - name: Static checks
 #        run: mvn --batch-mode --update-snapshots dependency-check:check pmd:pmd pmd:cpd spotbugs:spotbugs
         run: mvn -B archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=com.mcnz.maven -DartifactId=install-maven-tutorial     
-      - name: Publish image to DockerHub
-        run: mvn --batch-mode --update-snapshots compile jib:build
+#      - name: Publish image to DockerHub
+#        run: mvn --batch-mode --update-snapshots compile jib:build
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: 'prueba'
+          path: '.'
+          format: 'HTML'
       
       - name: Anchore scan
         uses: anchore/scan-action@v2
