@@ -53,8 +53,8 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Static checks
-        run: mvn --batch-mode --update-snapshots dependency-check:check pmd:pmd pmd:cpd spotbugs:spotbugs
-      
+#        run: mvn --batch-mode --update-snapshots dependency-check:check pmd:pmd pmd:cpd spotbugs:spotbugs
+        run: mvn -B archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=com.mcnz.maven -DartifactId=install-maven-tutorial     
       - name: Publish image to DockerHub
         run: mvn --batch-mode --update-snapshots compile jib:build
       
