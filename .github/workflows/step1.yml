@@ -1,0 +1,23 @@
+name: Step 1
+on:
+#  push:
+  workflow_dispatch:
+    branches:
+      - main # or the name of your main branch
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: 'prueba'
+          path: '.'
+          format: 'HTML'
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+           name: Depcheck report
+           path: ${{github.workspace}}/reports
