@@ -4,7 +4,9 @@ on:
     branches:
       - main
 jobs:
-  Test:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: Environment Variables
         shell: bash
