@@ -1,4 +1,4 @@
-name: Sast Scan
+name: SastScan
 on:
 #  push:
   workflow_dispatch:
