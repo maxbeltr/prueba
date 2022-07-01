@@ -1,4 +1,4 @@
-name: Step 2
+name: SonarScan
 on:
 #  push:
   workflow_dispatch:
