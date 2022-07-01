@@ -32,8 +32,6 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: DepCheckReport
-    #- name: Validate Report File Exists
-      #run: ls -R
     - name: Checkout source code
       uses: actions/checkout@v2
       with:
