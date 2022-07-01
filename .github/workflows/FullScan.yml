@@ -24,10 +24,12 @@ jobs:
         name: DepCheckReport
         path: ${{github.workspace}}/reports   
   release-project:
-    name: Release project
+    name: SonarQube Scan
     runs-on: ubuntu-latest
     needs: build-project
     steps:
+    - name: Validate Report File Exists
+      run: ls -R
     - name: SonarScan
       uses: sonarsource/sonarqube-scan-action@master
       env:
