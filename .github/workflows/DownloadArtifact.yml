@@ -45,7 +45,7 @@ jobs:
     # https://github.com/actions/download-artifact#download-all-artifacts
     #name: artifact_name
     # Optional, directory where to extract artifact(s), defaults to current directory
-         path: /github/workspace/reports/
+         #path: /github/workspace/reports/
     # Optional, defaults to current repo
          repo: ${{github.repository}}
     # Optional, check the workflow run whether it has an artifact
