@@ -1,9 +1,13 @@
 name: Download Artifact
+#on:
+  #workflow_run:
+    #workflows: [SastScan]
+    #types:
+      #- completed
 on:
-  workflow_run:
-    workflows: [SastScan]
-    types:
-      - completed
+  workflow_dispatch:
+    branches:
+      - main
 jobs:
   build:
     name: Build
