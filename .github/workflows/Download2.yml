@@ -1,0 +1,20 @@
+name: Download2
+  on:
+    workflow_dispatch:
+    branches:
+      - main
+jobs:
+  Test:
+    steps:
+      - name: Environment Variables
+        shell: bash
+        run: |
+          ARTIFACTS_SHA=$(git rev-parse HEAD)
+          BUILD_ARTIFACTS=BuildArtifacts_${ARTIFACTS_SHA}
+          echo "ARTIFACTS_DIR=$ARTIFACTS_DIR" >> $GITHUB_ENV
+      - name: Download Artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: SastScan.yml
+          name: ${{ env.BUILD_ARTIFACTS }}
