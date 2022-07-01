@@ -28,7 +28,7 @@ jobs:
     # Optional, no need to specify if PR is
     #commit: ${{github.event.pull_request.head.sha}}
     # Optional, will use the branch
-    branch: main
+         branch: main
     # Optional, defaults to all types
     #event: push
     # Optional, will use specified workflow run
@@ -41,16 +41,16 @@ jobs:
     # https://github.com/actions/download-artifact#download-all-artifacts
     #name: artifact_name
     # Optional, directory where to extract artifact(s), defaults to current directory
-    path: /github/workspace/reports/
+         path: /github/workspace/reports/
     # Optional, defaults to current repo
-    repo: ${{github.repository}}
+         repo: ${{github.repository}}
     # Optional, check the workflow run whether it has an artifact
     # then will get the last available artifact from previous workflow
     # default false, just try to download from the last one
-    check_artifacts:  false
+         check_artifacts:  false
     # Optional, search for the last workflow run whose stored an artifact named as in `name` input
     # default false
-    search_artifacts: false
+         search_artifacts: false
     # Optional, choose to skip unpacking the downloaded artifact(s)
     # default false
-    skip_unpack: false
+         skip_unpack: false
