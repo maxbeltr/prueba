@@ -29,7 +29,7 @@ jobs:
     needs: build-project
     steps:
     - name: Validate Report File Exists
-      run: ls -R
+      run: pwd
     #- name: SonarScan
       #uses: sonarsource/sonarqube-scan-action@master
       #env:
