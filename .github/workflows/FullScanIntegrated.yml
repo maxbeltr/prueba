@@ -1,0 +1,66 @@
+name: FullScan
+on:
+#  push:
+  workflow_dispatch:
+    branches:
+      - main # or the name of your main branch
+jobs:
+  build-project:
+    name: DepCheck Scan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: DepCheck
+      uses: dependency-check/Dependency-Check_Action@main
+      id: DepCheck
+      with:
+        project: 'prueba'
+        path: '.'
+        format: 'HTML'
+    - name: Upload Test results
+      uses: actions/upload-artifact@master
+      with:
+        name: DepCheckReport
+        path: ${{github.workspace}}/reports   
+  #release-project:
+    #name: SonarQube Scan
+    #runs-on: ubuntu-latest
+    #needs: build-project
+    #steps:
+    #- name: Download Artifact
+      #uses: actions/download-artifact@v3
+      #with:
+        #name: DepCheckReport
+    #- name: Checkout source code
+      #uses: actions/checkout@v2
+      #with:
+        #fetch-depth: 0
+      #- name: Setup Node.js
+        #uses: actions/setup-node@v1
+        #with:
+          #node-version: 12
+      #- name: Install dependencies
+        #run: yarn install
+      #- name: Gather Test Coverage
+        #run: yarn test-coverage
+    - name: SonarScan
+      uses: sonarsource/sonarqube-scan-action@master
+      with:
+        projectBaseDir: .
+        args: >
+          -Dproject.settings=/github/workspace/sonar-project.properties
+          -Dsonar.projectName=prueba
+          -Dsonar.projectKey=maxbeltr_prueba_AYGrnVIf2RBXLwNiHiaD
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        #INPUT_PROJECTBASEDIR: ${{ secrets.INPUT_PROJECTBASEDIR }}
+        #WORKSPACE: ${{ secrets.WORKSPACE }}
+        #WORKSPACE: ${{ secrets.SONAR_WORKSPACE }}
+    # If you wish to fail your job when the Quality Gate is red, uncomment the
+    # following lines. This would typically be used to fail a deployment.
+    # - uses: sonarsource/sonarqube-quality-gate-action@master
+    #   timeout-minutes: 5
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
