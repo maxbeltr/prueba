@@ -1,0 +1,30 @@
+name: Static Application Security Testing
+on:
+#  push:
+  workflow_dispatch:
+    branches:
+      - main # or the name of your main branch
+jobs:
+  build-project:
+    name: Source Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: OWASP Dependency Check
+      uses: dependency-check/Dependency-Check_Action@main
+      id: DepCheck
+      with:
+        project: 'prueba'
+        path: '.'
+        format: 'HTML'
+    - name: Upload Test results
+      uses: actions/upload-artifact@master
+      with:
+        name: DepCheckReport
+        path: ${{github.workspace}}/reports   
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
