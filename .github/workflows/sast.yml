@@ -15,6 +15,7 @@ jobs:
       uses: dependency-check/Dependency-Check_Action@main
       id: DepCheck
       with:
+        project: 'DependencyCheck'
         path: '.'
         format: 'HTML'
     - name: SonarQube Scan
