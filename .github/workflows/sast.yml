@@ -24,7 +24,8 @@ jobs:
         projectBaseDir: .
         args: >
           -Dproject.settings=/github/workspace/sonar-project.properties
-          -Dsonar.projectKey=maxbeltr_prueba_AYGrnVIf2RBXLwNiHiaD
+          -Dsonar.projectKey=$SONAR_PROJECT_KEY
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
