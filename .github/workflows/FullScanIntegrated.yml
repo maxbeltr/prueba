@@ -1,4 +1,4 @@
-name: FullScan
+name: FullScanIntegrated
 on:
 #  push:
   workflow_dispatch:
