@@ -6,7 +6,7 @@ on:
       - main # or the name of your main branch
 jobs:
   build-project:
-    name: DepCheck Scan
+    name: Source Code Analysis
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
