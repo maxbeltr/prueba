@@ -46,12 +46,12 @@ jobs:
         #run: yarn test-coverage
     - name: SonarScan
       uses: sonarsource/sonarqube-scan-action@master
-      with:
-        projectBaseDir: .
-        args: >
-          -Dproject.settings=/github/workspace/sonar-project.properties
-          -Dsonar.projectName=prueba
-          -Dsonar.projectKey=maxbeltr_prueba_AYGrnVIf2RBXLwNiHiaD
+      #with:
+        #projectBaseDir: .
+        #args: >
+          #-Dproject.settings=/github/workspace/sonar-project.properties
+          #-Dsonar.projectName=prueba
+          #-Dsonar.projectKey=maxbeltr_prueba_AYGrnVIf2RBXLwNiHiaD
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
