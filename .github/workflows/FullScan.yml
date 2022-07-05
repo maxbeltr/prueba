@@ -47,13 +47,13 @@ jobs:
     - name: SonarScan
       uses: sonarsource/sonarqube-scan-action@master
       with:
-        projectBaseDir: prueba/server
+        projectBaseDir: .
         args: >
           -Dproject.settings=/github/workspace/sonar-project.properties
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        INPUT_PROJECTBASEDIR: ${{ secrets.INPUT_PROJECTBASEDIR }}
+        #INPUT_PROJECTBASEDIR: ${{ secrets.INPUT_PROJECTBASEDIR }}
         #WORKSPACE: ${{ secrets.WORKSPACE }}
         #WORKSPACE: ${{ secrets.SONAR_WORKSPACE }}
     # If you wish to fail your job when the Quality Gate is red, uncomment the
